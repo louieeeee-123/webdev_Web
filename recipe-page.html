@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Treats | Recipe List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            background-color: #FFE39B;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .border-top, .border-bottom {
+            width: 100%;
+            height: 180px; 
+            background-repeat: repeat-x, repeat-x;
+            z-index: 10;
+            flex-shrink: 0;
+            animation: scrollLace 45s linear infinite;
+        }
+
+        .border-top {
+            background-image: url('images/lace-top.png'), url('images/gingham-border.png');
+            background-size: auto 50%, auto 150px;
+            background-position: bottom left, top left;
+        }
+
+        .border-bottom {
+            background-image: url('images/lace-bottom.png'), url('images/gingham-border.png');
+            background-size: auto 50%, auto 150px;
+            background-position: top left, bottom left;
+        }
+
+        @keyframes scrollLace {
+            from { background-position: 0px bottom, 0px top; }
+            to { background-position: 1000px bottom, 0px top; }
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 60px 20px;
+            margin-top: -40px; /* Overlap effect */
+            margin-bottom: -40px;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-text {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero-text h1 {
+            color: #d64545;
+            font-size: 3rem;
+            font-family: 'Brush Script MT', cursive;
+            text-shadow: 1px 1px 0px white;
+        }
+
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            max-width: 1300px;
+            width: 100%;
+        }
+
+        .recipe-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(214, 69, 69, 0.2);
+        }
+
+        .recipe-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            filter: sepia(10%) brightness(105%);
+        }
+
+        .card-body {
+            padding: 15px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-body h3 {
+            color: #d64545;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: #d64545;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        /* Tablet/Mobile View */
+        @media (max-width: 1100px) {
+            .recipe-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .recipe-grid { grid-template-columns: 1fr; }
+            .hero-text h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="border-top"></div>
+
+    <main class="main-content">
+        <div class="hero-text">
+            <h1>Select one to view recipe</h1>
+            <p>Feeling undecided? Take our <a href="quiz.html">quiz</a> to get you started.</p>
+        </div>
+
+        <div class="recipe-grid">
+            <div class="recipe-card">
+                <img src="images/strawberry-shortcake.jpg">
+                <div class="card-body">
+                    <h3>Strawberry Shortcake</h3>
+                    <a href="strawberry-shortcake.html" class="btn">View Recipe</a>
+                </div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="images/matcha-tiramisu.jpeg">
+                <div class="card-body">
+                    <h3>Matcha Tiramisu</h3>
+                    <a href="matcha-tiramisu.html" class="btn">View Recipe</a>
+                </div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="images/apple-spiced-cake.jpeg">
+                <div class="card-body">
+                    <h3>Apple Spiced Cake</h3>
+                    <a href="spiced-apple-cake.html" class="btn">View Recipe</a>
+                </div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="images/granola-bar.jpg">
+                <div class="card-body">
+                    <h3>Granola Bars</h3>
+                    <a href="#" class="btn">View Recipe</a>
+                </div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="images/lemon-blueberry-muffin.jpg" alt="Cupcakes">
+                <div class="card-body">
+                    <h3>Lemon Blueberry Muffin</h3>
+                    <a href="#" class="btn">View Recipe</a>
+                </div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="images/mango-shake.jpg">
+                <div class="card-body">
+                    <h3>Mango Shake</h3>
+                    <a href="#" class="btn">View Recipe</a>
+                </div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="images/strawberry-milk.jpg">
+                <div class="card-body">
+                    <h3>Strawberry Milk</h3>
+                    <a href="#" class="btn">View Recipe</a>
+                </div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="images/breakfast-pancake.jpg" alt="Pancakes">
+                <div class="card-body">
+                    <h3>Breakfast Pancakes</h3>
+                    <a href="#" class="btn">View Recipe</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="border-bottom"></div>
+</div>
+
+</body>
+</html>

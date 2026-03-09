@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dessert Personality Quiz</title>
+    <style>
+        :root {
+            --form-red: #d62828;
+            --bg-grey: #f0ebf8;
+            --white: #ffffff;
+            --text: #202124;
+        }
+
+        body {
+            background-color: #FFE39B;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            counter-reset: countA 0 countB 0 countC 0 countD 0;
+        }
+        .border-top, .border-bottom {
+            width: 100%;
+            height: 100px; 
+            background-repeat: repeat-x, repeat-x;
+            z-index: 10; 
+            flex-shrink: 0;
+            animation: scrollLace 45s linear infinite;
+        }
+
+        .border-top {
+            background-image: url('images/lace-top.png'), url('images/gingham-border.png');
+            background-size: auto 90%, auto 150px;
+            background-position: top left, bottom left;
+        }
+
+        .border-bottom {
+            background-image: url('images/lace-bottom.png'), url('images/gingham-border.png');
+            background-size: auto 90%, auto 150px;
+            background-position: top left, bottom left;
+        }
+
+        @keyframes scrollLace {
+            from { background-position: 0px bottom, 0px top; }
+            to { background-position: 1000px bottom, 0px top; }
+        }
+
+            .navbar {
+            width: 100%;
+            height: 100px;
+            background-repeat: repeat-x;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: auto 100%;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-btn {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #d62828;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 2px solid #d62828;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn:hover {
+            background-color: #d62828;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+
+        .form-container { width: 100%; max-width: 640px; }
+
+        /* --- SCORING LOGIC --- */
+        input[id$="a"]:checked { counter-increment: countA; }
+        input[id$="b"]:checked { counter-increment: countB; }
+        input[id$="c"]:checked { counter-increment: countC; }
+        input[id$="d"]:checked { counter-increment: countD; }
+
+        input[type="radio"], input[type="checkbox"] { 
+            position: absolute; 
+            left: -9999px; 
+            opacity: 0; 
+        }
+
+        /* --- CARD STYLING --- */
+        .card {
+            background: var(--white);
+            border-radius: 8px;
+            border: 1px solid #dadce0;
+            margin-bottom: 12px;
+            padding: 24px;
+            display: none; 
+            flex-direction: column;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            color: var(--text);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- 3. NAVIGATION LOGIC --- */
+        #step1:not(:checked) ~ .q1,
+        #step1:checked ~ #step2:not(:checked) ~ .q2,
+        #step2:checked ~ #step3:not(:checked) ~ .q3,
+        #step3:checked ~ #step4:not(:checked) ~ .q4,
+        #step4:checked ~ #step5:not(:checked) ~ .q5,
+        #step5:checked ~ #step6:not(:checked) ~ .q6,
+        #step6:checked ~ #step7:not(:checked) ~ .q7,
+        #step7:checked ~ #step8:not(:checked) ~ .q8,
+        #step8:checked ~ #step9:not(:checked) ~ .q9,
+        #step9:checked ~ #step10:not(:checked) ~ .q10,
+        #step10:checked ~ .results { display: flex; }
+
+        /* HEADER CARD */
+        .header-card { 
+            display: flex; 
+            border-top: 10px solid var(--form-red); 
+            padding-top: 0;
+            overflow: hidden;
+        }
+        .lace-decor {
+            background-image: url('image_f771fb.jpg');
+            background-size: contain;
+            height: 60px;
+            width: 110%;
+            margin-left: -5%;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        /* OPTIONS STYLING */
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin: 4px 0;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .option:hover { background: #f8f9fa; }
+        .option:active { transform: scale(0.98); background: #f1f3f4; }
+        
+        .circle {
+            height: 20px; width: 20px;
+            border: 2px solid #5f6368;
+            border-radius: 50%;
+            margin-right: 15px;
+            transition: all 0.2s;
+            display: inline-block;
+            vertical-align: middle;
+            box-sizing: border-box;
+        }
+        
+        /* Change circle color when the hidden radio is checked */
+        #q1a:checked ~ .card label[for="q1a"] .circle,
+        #q1b:checked ~ .card label[for="q1b"] .circle,
+        #q1c:checked ~ .card label[for="q1c"] .circle,
+        #q1d:checked ~ .card label[for="q1d"] .circle,
+        #q2a:checked ~ .card label[for="q2a"] .circle,
+        #q2b:checked ~ .card label[for="q2b"] .circle {
+            background-color: var(--form-red);
+            border-color: var(--form-red);
+            box-shadow: inset 0 0 0 3px white;
+        }
+
+        .question-text { font-size: 16px; font-weight: bold; margin-bottom: 15px; }
+
+        /* PROGRESS BAR */
+        .progress-bar { width: 100%; height: 8px; background: #e0e0e0; border-radius: 4px; margin-bottom: 15px; overflow: hidden; }
+        .fill { height: 100%; background: var(--form-red); width: 0%; transition: width 0.4s ease; }
+        
+        #step1:checked ~ .progress-bar .fill { width: 10%; }
+        #step2:checked ~ .progress-bar .fill { width: 20%; }
+        #step3:checked ~ .progress-bar .fill { width: 30%; }
+        #step4:checked ~ .progress-bar .fill { width: 40%; }
+        #step5:checked ~ .progress-bar .fill { width: 50%; }
+        #step6:checked ~ .progress-bar .fill { width: 60%; }
+        #step7:checked ~ .progress-bar .fill { width: 70%; }
+        #step8:checked ~ .progress-bar .fill { width: 80%; }
+        #step9:checked ~ .progress-bar .fill { width: 90%; }
+        #step10:checked ~ .progress-bar .fill { width: 100%; }
+
+        /* THE FINAL TALLY DISPLAY */
+        .tally-output {
+            background: #fff5f5;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 1px dashed var(--form-red);
+        }
+        .tally-output::after {
+            content: "A: " counter(countA) " | B: " counter(countB) " | C: " counter(countC) " | D: " counter(countD);
+            font-weight: bold;
+            color: var(--form-red);
+            font-size: 1.3rem;
+        }
+
+        .result-block { margin-bottom: 15px; font-size: 15px; line-height: 1.5; }
+        .result-block strong { color: var(--form-red); }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+<div class="border-top">
+    <nav class="navbar">
+        <div class="nav-links">
+        <a href="index.html" class="nav-btn">Home</a>
+        <a href="recipe-page.html" class="nav-btn">Recipe List</a>
+        </div>
+    </nav>
+</div>
+
+    <input type="radio" name="q1" id="q1a"> <input type="radio" name="q1" id="q1b"> <input type="radio" name="q1" id="q1c"> <input type="radio" name="q1" id="q1d">
+    <input type="radio" name="q2" id="q2a"> <input type="radio" name="q2" id="q2b"> <input type="radio" name="q2" id="q2c"> <input type="radio" name="q2" id="q2d">
+    <input type="radio" name="q3" id="q3a"> <input type="radio" name="q3" id="q3b"> <input type="radio" name="q3" id="q3c"> <input type="radio" name="q3" id="q3d">
+    <input type="radio" name="q4" id="q4a"> <input type="radio" name="q4" id="q4b"> <input type="radio" name="q4" id="q4c"> <input type="radio" name="q4" id="q4d">
+    <input type="radio" name="q5" id="q5a"> <input type="radio" name="q5" id="q5b"> <input type="radio" name="q5" id="q5c"> <input type="radio" name="q5" id="q5d">
+    <input type="radio" name="q6" id="q6a"> <input type="radio" name="q6" id="q6b"> <input type="radio" name="q6" id="q6c"> <input type="radio" name="q6" id="q6d">
+    <input type="radio" name="q7" id="q7a"> <input type="radio" name="q7" id="q7b"> <input type="radio" name="q7" id="q7c"> <input type="radio" name="q7" id="q7d">
+    <input type="radio" name="q8" id="q8a"> <input type="radio" name="q8" id="q8b"> <input type="radio" name="q8" id="q8c"> <input type="radio" name="q8" id="q8d">
+    <input type="radio" name="q9" id="q9a"> <input type="radio" name="q9" id="q9b"> <input type="radio" name="q9" id="q9c"> <input type="radio" name="q9" id="q9d">
+    <input type="radio" name="q10" id="q10a"> <input type="radio" name="q10" id="q10b"> <input type="radio" name="q10" id="q10c"> <input type="radio" name="q10" id="q10d">
+
+    <input type="checkbox" id="step1"> <input type="checkbox" id="step2"> <input type="checkbox" id="step3"> <input type="checkbox" id="step4"> <input type="checkbox" id="step5">
+    <input type="checkbox" id="step6"> <input type="checkbox" id="step7"> <input type="checkbox" id="step8"> <input type="checkbox" id="step9"> <input type="checkbox" id="step10">
+
+    <div class="progress-bar"><div class="fill"></div></div>
+
+    <div class="card header-card">
+        <div class="lace-decor"></div>
+        <div style="padding: 0 24px 24px 24px;">
+            <h1 style="margin:0 0 10px 0;">Dessert Personality Quiz</h1>
+            <p style="margin:0;">Answer the questions and find out what dessert matches your personality!</p>
+        </div>
+    </div>
+
+    <div class="card q1">
+        <p class="question-text">1. What flavor do you usually choose first?</p>
+        <label for="q1a" class="option" onclick="setTimeout(() => document.getElementById('step1').checked = true, 150)"><span class="circle"></span> A. Chocolate</label>
+        <label for="q1b" class="option" onclick="setTimeout(() => document.getElementById('step1').checked = true, 150)"><span class="circle"></span> B. Vanilla</label>
+        <label for="q1c" class="option" onclick="setTimeout(() => document.getElementById('step1').checked = true, 150)"><span class="circle"></span> C. Strawberry</label>
+        <label for="q1d" class="option" onclick="setTimeout(() => document.getElementById('step1').checked = true, 150)"><span class="circle"></span> D. Something unique like matcha or caramel</label>
+    </div>
+
+    <div class="card q2">
+        <p class="question-text">2. What kind of dessert texture do you like most?</p>
+        <label for="q2a" class="option" onclick="setTimeout(() => document.getElementById('step2').checked = true, 150)"><span class="circle"></span> A. Soft and gooey</label>
+        <label for="q2b" class="option" onclick="setTimeout(() => document.getElementById('step2').checked = true, 150)"><span class="circle"></span> B. Light and fluffy</label>
+        <label for="q2c" class="option" onclick="setTimeout(() => document.getElementById('step2').checked = true, 150)"><span class="circle"></span> C. Creamy and smooth</label>
+        <label for="q2d" class="option" onclick="setTimeout(() => document.getElementById('step2').checked = true, 150)"><span class="circle"></span> D. Crunchy</label>
+    </div>
+
+    <div class="card q3">
+        <p class="question-text">3. When do you usually crave dessert?</p>
+        <label for="q3a" class="option" onclick="setTimeout(() => document.getElementById('step3').checked = true, 150)"><span class="circle"></span> A. After every meal</label>
+        <label for="q3b" class="option" onclick="setTimeout(() => document.getElementById('step3').checked = true, 150)"><span class="circle"></span> B. When I’m stressed</label>
+        <label for="q3c" class="option" onclick="setTimeout(() => document.getElementById('step3').checked = true, 150)"><span class="circle"></span> C. During celebrations</label>
+        <label for="q3d" class="option" onclick="setTimeout(() => document.getElementById('step3').checked = true, 150)"><span class="circle"></span> D. Late at night</label>
+    </div>
+
+    <div class="card q4">
+        <p class="question-text">4. Pick a drink to go with your dessert:</p>
+        <label for="q4a" class="option" onclick="setTimeout(() => document.getElementById('step4').checked = true, 150)"><span class="circle"></span> A. Coffee</label>
+        <label for="q4b" class="option" onclick="setTimeout(() => document.getElementById('step4').checked = true, 150)"><span class="circle"></span> B. Milk</label>
+        <label for="q4c" class="option" onclick="setTimeout(() => document.getElementById('step4').checked = true, 150)"><span class="circle"></span> C. Tea</label>
+        <label for="q4d" class="option" onclick="setTimeout(() => document.getElementById('step4').checked = true, 150)"><span class="circle"></span> D. Juice</label>
+    </div>
+
+    <div class="card q5">
+        <p class="question-text">5. Where would you enjoy dessert the most?</p>
+        <label for="q5a" class="option" onclick="setTimeout(() => document.getElementById('step5').checked = true, 150)"><span class="circle"></span> A. At home relaxing</label>
+        <label for="q5b" class="option" onclick="setTimeout(() => document.getElementById('step5').checked = true, 150)"><span class="circle"></span> B. At a café</label>
+        <label for="q5c" class="option" onclick="setTimeout(() => document.getElementById('step5').checked = true, 150)"><span class="circle"></span> C. At a party</label>
+        <label for="q5d" class="option" onclick="setTimeout(() => document.getElementById('step5').checked = true, 150)"><span class="circle"></span> D. Anywhere as long as there’s dessert</label>
+    </div>
+
+    <div class="card q6">
+        <p class="question-text">6. What mood do desserts give you?</p>
+        <label for="q6a" class="option" onclick="setTimeout(() => document.getElementById('step6').checked = true, 150)"><span class="circle"></span> A. Comforted</label>
+        <label for="q6b" class="option" onclick="setTimeout(() => document.getElementById('step6').checked = true, 150)"><span class="circle"></span> B. Happy</label>
+        <label for="q6c" class="option" onclick="setTimeout(() => document.getElementById('step6').checked = true, 150)"><span class="circle"></span> C. Excited</label>
+        <label for="q6d" class="option" onclick="setTimeout(() => document.getElementById('step6').checked = true, 150)"><span class="circle"></span> D. Relaxed</label>
+    </div>
+
+    <div class="card q7">
+        <p class="question-text">7. Choose a topping:</p>
+        <label for="q7a" class="option" onclick="setTimeout(() => document.getElementById('step7').checked = true, 150)"><span class="circle"></span> A. Chocolate syrup</label>
+        <label for="q7b" class="option" onclick="setTimeout(() => document.getElementById('step7').checked = true, 150)"><span class="circle"></span> B. Whipped cream</label>
+        <label for="q7c" class="option" onclick="setTimeout(() => document.getElementById('step7').checked = true, 150)"><span class="circle"></span> C. Fresh fruits</label>
+        <label for="q7d" class="option" onclick="setTimeout(() => document.getElementById('step7').checked = true, 150)"><span class="circle"></span> D. Nuts or caramel</label>
+    </div>
+
+    <div class="card q8">
+        <p class="question-text">8. What kind of dessert presentation do you like?</p>
+        <label for="q8a" class="option" onclick="setTimeout(() => document.getElementById('step8').checked = true, 150)"><span class="circle"></span> A. Classic and simple</label>
+        <label for="q8b" class="option" onclick="setTimeout(() => document.getElementById('step8').checked = true, 150)"><span class="circle"></span> B. Cute and colorful</label>
+        <label for="q8c" class="option" onclick="setTimeout(() => document.getElementById('step8').checked = true, 150)"><span class="circle"></span> C. Elegant and fancy</label>
+        <label for="q8d" class="option" onclick="setTimeout(() => document.getElementById('step8').checked = true, 150)"><span class="circle"></span> D. Big and overloaded</label>
+    </div>
+
+    <div class="card q9">
+        <p class="question-text">9. If you could eat dessert with someone, who would it be?</p>
+        <label for="q9a" class="option" onclick="setTimeout(() => document.getElementById('step9').checked = true, 150)"><span class="circle"></span> A. Family</label>
+        <label for="q9b" class="option" onclick="setTimeout(() => document.getElementById('step9').checked = true, 150)"><span class="circle"></span> B. Friends</label>
+        <label for="q9c" class="option" onclick="setTimeout(() => document.getElementById('step9').checked = true, 150)"><span class="circle"></span> C. Someone special</label>
+        <label for="q9d" class="option" onclick="setTimeout(() => document.getElementById('step9').checked = true, 150)"><span class="circle"></span> D. Just myself</label>
+    </div>
+
+    <div class="card q10">
+        <p class="question-text">10. What matters most in a dessert?</p>
+        <label for="q10a" class="option" onclick="setTimeout(() => document.getElementById('step10').checked = true, 150)"><span class="circle"></span> A. Rich flavor</label>
+        <label for="q10b" class="option" onclick="setTimeout(() => document.getElementById('step10').checked = true, 150)"><span class="circle"></span> B. Sweetness</label>
+        <label for="q10c" class="option" onclick="setTimeout(() => document.getElementById('step10').checked = true, 150)"><span class="circle"></span> C. Aesthetic/look</label>
+        <label for="q10d" class="option" onclick="setTimeout(() => document.getElementById('step10').checked = true, 150)"><span class="circle"></span> D. Creativity</label>
+    </div>
+
+    <div class="card results">
+        <h2 style="margin-top:0;">Quiz Results</h2>
+        <p>Look at your highest score below to find your match!</p>
+        
+        <div class="tally-output"></div>
+
+        <div class="result-block">
+            <strong>Mostly A's — <a href="strawberry-shortcake.html">Strawberry Shortcake</a></strong><br>
+            You are warm, comforting, and dependable. People feel relaxed around you, just like enjoying a cozy taste of a shortcake after a long day.
+        </div>
+        <div class="result-block">
+            <strong>Mostly B's — <a href="lemon-blueberry-muffin.html">Lemon Blueberry Muffin</a></strong><br>
+            You are cheerful, friendly, and fun to be around. Your positive energy makes people smile, just like a muffin.
+        </div>
+        <div class="result-block">
+            <strong>Mostly C's — <a href="matcha-tiramisu.html">Matcha Tiramisu</a></strong><br>
+            You are elegant and thoughtful. You appreciate the finer things in life and enjoy meaningful moments with others.
+        </div>
+        <div class="result-block">
+            <strong>Mostly D's — <a href="spiced-apple-cake.html">Spiced Apple Cake</a></strong><br>
+            You are creative, adventurous, and spontaneous. You love trying new things and bringing excitement wherever you go.
+        </div>
+
+        <button onclick="location.reload()" style="background:var(--form-red); color:white; border:none; padding:12px; border-radius:4px; font-size:16px; cursor:pointer; margin-top:10px; transition: 0.2s;">Submit Another Response</button>
+    </div>
+
+<div class="border-bottom"></div>
+</div>
+
+</body>
+</html>

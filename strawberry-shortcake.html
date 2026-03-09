@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Treats | Strawberry Shortcake</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            background-image: url('images/gingham-bg.png');
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        footer{
+            width: 100%;
+            height: 100px;
+            background-repeat: repeat-x;
+            background-image: url('images/lace-bottom.png');
+            background-size: auto 100%;
+        }
+
+        .navbar {
+            width: 100%;
+            height: 100px;
+            background-repeat: repeat-x;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('images/lace-top.png');
+            background-size: auto 100%;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-btn {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #d62828;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 2px solid #d62828;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn:hover {
+            background-color: #d62828;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .recipe-card {
+        max-width: 1000px;
+        margin: 30px auto;
+        padding: 30px;
+        background-color: #FFE39B;
+        border: 1px solid #f1d2d2;
+        border-radius: 8px;
+        font-family: 'Georgia', serif;
+        color: #4a4a4a;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .recipe-header h1 {
+        color: #d62828;
+        text-align: center;
+        border-bottom: 2px dashed #d62828;
+        padding-bottom: 10px;
+        }
+
+        .recipe-content {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 20px;
+        margin-top: 20px;
+        }
+
+        h3 {
+        color: #d62828;
+        font-variant: small-caps;
+        }
+
+        ul, ol {
+        padding-left: 20px;
+        line-height: 1.6;
+        }
+
+        li {
+        margin-bottom: 10px;
+        }
+
+        @media (max-width: 600px) {
+        .recipe-content {
+            grid-template-columns: 1fr;
+        }
+        }
+
+        .recipe-img-container {
+            margin: 20px 0;
+            padding: 10px;
+            background: white;
+            border: 1px solid #eee;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transform: rotate(-1deg);
+            transition: transform 0.3s ease;  
+        }
+
+        .recipe-main-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+        }
+</style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-links">
+        <a href="landing-page.html" class="nav-btn">Home</a>
+        <a href="recipe-page.html" class="nav-btn">Recipe List</a>
+        </div>
+    </nav>
+    <article class="recipe-card">
+    <header class="recipe-header">
+        <h1>Strawberry Shortcake</h1>
+    </header>
+    <div class="recipe-img-container">
+        <img src="images/strawberry-shortcake.jpg" alt="Strawberry Shortcake" class="recipe-main-img">
+    </div>
+
+    <div class="recipe-content">
+        <section class="ingredients">
+        <h3>Ingredients</h3>
+        <h4>For the shortcake:</h4>
+        <ul>
+            <li><strong>2 cups</strong> All-purpose flour</li>
+            <li><strong>1/4 cup</strong> Granulated sugar</li>
+            <li><strong>1 tablespoon</strong> Baking powder</li>
+            <li><strong>1/2 teaspoon</strong> Salt</li>
+            <li><strong>1/2 cup</strong> Unsalted butter, cold and cut into small cubes</li>
+            <li><strong>2/3 cup</strong> Milk</li>
+            <li><strong>1 teaspoon</strong> Vanilla Extract</li>
+        </ul>
+        <h4>For the Strawberries:</h4>
+        <ul>
+            <li><strong>1 pound</strong> fresh strawberries</li>
+            <li><strong>2-3 tablespoons</strong> Granulated sugar</li>
+            <li><strong>1 teaspoon</strong> lemon juice</li>
+        </ul>
+        <h4>For the whipped cream:</h4>
+        <ul>
+            <li><strong>1 cup</strong> heavy cream (chilled)</li>
+            <li><strong>2 tablespoons</strong> owdered sugar</li>
+            <li><strong>1 teaspoon</strong> Vanilla Extract</li>
+        </ul>
+        </section>
+
+        <section class="instructions">
+        <h3>Instructions</h3>
+        <ol>
+        <li>Preheat oven to 425°F(220°C). Line a baking sheet with parchment paper or lightly grease it.</li>
+        <li>In  a large mixing bowl, whisk together the flour, sugar, baking powder, and salt.</li>
+        <li>Add the cold cubbed butter to the flour mixture. Using a pastry cutter or your fingertips,cut the butter into the flour until the mixture resembles coarse crumbs.</li>
+        <li>In a separate bowl, mix together the milk and vanilla extract. Gradually pour the milk mixture into the flour mixutre, stirring until just comnined. Be careful not to overmix</li>
+        <li>Turn the dough out into a lightly floured surface. Gently pat the dough into a rectangle about 3/4 inch thick. Use a round cookie cutter or the rim of a glass to cut out circles of dought. Place the dough circles onto the prepared baking sheet, spacing them a few inches apart. </li>
+        <li>Bake the shortcakes into the preheated oven for 12-15 minutes or until they are golden brown. Remove from the oven and transfer to a wire rack to cool completely. </li>
+        <li>While the shortcakes are cooling, prepare the strawberries. In a bowl, combine the sliced strawberries granulated sugar, lemon slices. Toss gently to coat the strawberries in the sugar. Let them sit for about 15-20 minutes to allow the juices to release.</li>
+        <li>To make the whipped cream, pour the chilled heavy cream into a mixing bowl. Add the podered sugar and the vanilla extract. Using an electric mixer, beat hte cream on high speed until stiff peaks form.</li>
+        <li>To assemble the strawberry shortcakes, sliced the cooled shortcakes in half horizontally. Spoon a generous amount of macerated strawberries onto the bottom half of each shortcake. Top with a dollop of whipped cream, then place the other half of the shortcake on top.</li>
+        <li>Garnish the strawberry shortcakes with additional whipped cream and fresh strawberries, if desired. Serve immediately and enjoy the delicious taste of summer in every bite.</li>
+        </ol>
+        </section>
+    </div>
+    </article>
+        <footer>
+            <p><i>This website is only for educational purposes. All artworks/images/recipes shown in the website belong to their respective owners.</i></p>
+        </footer>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Treats</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            background-color: #FFE39B;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .border-top, .border-bottom {
+            width: 100%;
+            height: 100px; 
+            background-repeat: repeat-x, repeat-x;
+            z-index: 10; 
+            flex-shrink: 0;
+            animation: scrollLace 45s linear infinite;
+        }
+
+        .border-top {
+            background-image: url('images/lace-top.png'), url('images/gingham-border.png');
+            background-size: auto 90%, auto 150px;
+            background-position: top left, bottom left;
+        }
+
+        .border-bottom {
+            background-image: url('images/lace-bottom.png'), url('images/gingham-border.png');
+            background-size: auto 50%, auto 147px;
+            background-position: top left, bottom left;
+        }
+
+        @keyframes scrollLace {
+            from { background-position: 0px bottom, 0px top; }
+            to { background-position: 1000px bottom, 0px top; }
+        }
+        
+
+        .main-content {
+            flex-grow: 1; 
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: -30px; 
+            margin-bottom: -30px;
+            z-index: 5;
+        }
+
+        .image-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            z-index: -1;
+        }
+
+        .image-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            filter: sepia(10%) brightness(105%);
+        }
+
+        .hero-text {
+            text-align: center;
+            padding: 20px;
+            color: #d64545;
+            font-family: 'Cursive', sans-serif;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background-color: #d64545;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="border-top"></div>
+
+    <div class="main-content">
+        <div class="image-background">
+            <img src="images/donut.jpg" alt="Image of Donuts by Heather Ford @ Unsplash">
+            <img src="images/crepe.jpg" alt="Image of Strawberry Crepe by joyfulcaptures @ Unsplash">
+            <img src="images/cupcake.jpg" alt="Image of Strawberry Cupcake by Deva Williamson @ Unsplash">
+        </div>
+
+        <div class="hero-text">
+            <h1>Do you love a sweet treat every now and then?<br>Looking for recipes to satisfy your cravings?</h1>
+            <a href="recipe-page.html" class="btn">View recipes</a>
+        </div>
+    </div>
+
+    <div class="border-bottom"></div>
+</div>
+
+</body>
+</html>
